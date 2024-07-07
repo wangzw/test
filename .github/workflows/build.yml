@@ -16,10 +16,6 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    container:
-      image: oraclelinux:9
-      volumes:
-        - /home/runner/.ssh/:/root/.ssh/
 
     services:
       runtime:
@@ -34,11 +30,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Install tmate
-        run: |
-          yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
-          yum install -y epel-release
-          yum install -y tmate docker-ce-cli
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
