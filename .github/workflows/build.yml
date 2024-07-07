@@ -23,7 +23,7 @@ jobs:
         image: oraclelinux:9
         options: --privileged --tty --hostname runtime --entrypoint /usr/sbin/init
         volumes:
-          - ${GITHUB_WORKSPACE}:/workspace/
+          - ${{ github.workspace }}:/workspace/
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
