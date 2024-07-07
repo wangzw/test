@@ -19,7 +19,7 @@ jobs:
     services:
       runtime:
         image: oraclelinux:9
-        options: --privileged --entrypoint /usr/sbin/init
+        options: --privileged --tty --entrypoint /usr/sbin/init
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
