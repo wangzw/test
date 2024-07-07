@@ -18,12 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: oraclelinux:9
+      volumes:
+        - ~/.ssh:/root/.ssh
+
     services:
       runtime:
         image: oraclelinux:9
-        options: --privileged --tty --hostname runtime --entrypoint /usr/sbin/init
+        options: --privileged --tty --hostname runtime --workdir /workspace --entrypoint /usr/sbin/init
         volumes:
-          - ${{ github.workspace }}:/workspace/
+          - ${{ github.workspace }}:/workspace
+          - ~/.ssh:/root/.ssh
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -32,8 +36,9 @@ jobs:
 
       - name: Install tmate
         run: |
+          yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
           yum install -y epel-release
-          yum install -y tmate
+          yum install -y tmate docker-ce-cli
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
