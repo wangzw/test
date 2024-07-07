@@ -19,15 +19,15 @@ jobs:
     container:
       image: oraclelinux:9
       volumes:
-        - /home/runner/.ssh:/root/.ssh
+        - /home/runner/.ssh/:/root/.ssh/
 
     services:
       runtime:
         image: oraclelinux:9
         options: --privileged --hostname runtime --workdir /workspace --entrypoint /usr/sbin/init
         volumes:
-          - ${{ github.workspace }}:/workspace
-          - /home/runner/.ssh:/root/.ssh
+          - ${{ github.workspace }}:/workspace/
+          - /home/runner/.ssh/:/root/.ssh/
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
