@@ -22,7 +22,7 @@ jobs:
         options: --privileged --hostname runtime --workdir /workspace --entrypoint /usr/sbin/init
         volumes:
           - ${{ github.workspace }}:/workspace/
-          - /home/runner/.ssh/:/root/.ssh/
+          - /home/runner/.ssh/:/root/.ssh/:ro
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
