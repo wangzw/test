@@ -36,8 +36,7 @@ jobs:
           yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
           yum install -y epel-release
           yum install -y tmate docker-ce-cli
+          docker cp ~/.ssh/id_rsa.pub runtime:/root/.ssh/authorized_keys
 
       - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          install-dependencies: false
+        uses: lhotari/action-upterm@v1
