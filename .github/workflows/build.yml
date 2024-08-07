@@ -49,7 +49,7 @@ jobs:
           docker cp ~/.ssh/id_rsa.pub segment1:/root/.ssh/authorized_keys
           docker cp ~/.ssh/id_rsa.pub segment2:/root/.ssh/authorized_keys
           docker cp ~/.ssh/id_rsa.pub segment3:/root/.ssh/authorized_keys
-dow
+
       - name: Install tmate
         run: |
           yum install -y epel-release
