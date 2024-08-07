@@ -46,17 +46,6 @@ jobs:
           yum install -y epel-release docker-ce-cli
           yum install -y tmate
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          install-dependencies: false
-
       - name: Setup authorized ssh
         run: |
-          set -x
-          
-          docker cp ~/.ssh/id_rsa.pub segment1:/root/.ssh/authorized_keys
-          docker cp ~/.ssh/id_rsa.pub segment2:/root/.ssh/authorized_keys
-          docker cp ~/.ssh/id_rsa.pub segment3:/root/.ssh/authorized_keys
-          
-          /usr/bin/start-systemd.sh
+          bash -x /usr/bin/start-systemd.sh
