@@ -53,7 +53,7 @@ jobs:
       - name: Setup authorized ssh
         run: |
           set -x
-          /usr/bin/start-systemd.sh || echo $?; whoami; cat /tmp/start-systemd.log
+          /usr/bin/start-systemd.sh
 
       - name: Setup tmate session
         if: ${{ failure() }}
