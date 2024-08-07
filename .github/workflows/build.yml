@@ -52,7 +52,7 @@ jobs:
 
       - name: Setup authorized ssh
         run: |
-          bash -x /usr/bin/start-systemd.sh
+          bash -x /usr/bin/start-systemd.sh || :
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
