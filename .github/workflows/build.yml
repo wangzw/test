@@ -17,12 +17,23 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     container:
-      image: oraclelinux:9
+      image: ghcr.io/wangzw/devel:latest
+      options: --privileged
 
     services:
-      runtime:
+      segment1:
         image: oraclelinux:9
-        options: --privileged --name runtime --hostname runtime --workdir /workspace --entrypoint /usr/sbin/init
+        options: --privileged --name segment1 --hostname segment1 --workdir /workspace --entrypoint /usr/sbin/init
+        volumes:
+          - ${{ github.workspace }}:/workspace/
+      segment2:
+        image: oraclelinux:9
+        options: --privileged --name segment2 --hostname segment2 --workdir /workspace --entrypoint /usr/sbin/init
+        volumes:
+          - ${{ github.workspace }}:/workspace/
+      segment3:
+        image: oraclelinux:9
+        options: --privileged --name segment3 --hostname segment3 --workdir /workspace --entrypoint /usr/sbin/init
         volumes:
           - ${{ github.workspace }}:/workspace/
 
@@ -31,12 +42,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Setup env
+        run: |
+          /usr/bin/start-systemd.sh
+          
+          docker cp ~/.ssh/id_rsa.pub segment1:/root/.ssh/authorized_keys
+          docker cp ~/.ssh/id_rsa.pub segment2:/root/.ssh/authorized_keys
+          docker cp ~/.ssh/id_rsa.pub segment3:/root/.ssh/authorized_keys
+dow
       - name: Install tmate
         run: |
-          yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
           yum install -y epel-release
-          yum install -y tmate docker-ce-cli
-          docker cp ~/.ssh/id_rsa.pub runtime:/root/.ssh/authorized_keys
+          yum install -y tmate
 
       - name: Setup tmate session
         uses: lhotari/action-upterm@v1
