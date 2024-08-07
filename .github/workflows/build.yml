@@ -44,6 +44,8 @@ jobs:
 
       - name: Install tmate & docker-ce-cli
         run: |
+          set -x
+          
           yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
           yum install -y tmate docker-ce-cli
           yum install -y epel-release
