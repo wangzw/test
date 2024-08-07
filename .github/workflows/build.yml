@@ -42,10 +42,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Setup env
+      - name: Setup authorized ssh
         run: |
-          /usr/bin/start-systemd.sh
-          
           docker cp ~/.ssh/id_rsa.pub segment1:/root/.ssh/authorized_keys
           docker cp ~/.ssh/id_rsa.pub segment2:/root/.ssh/authorized_keys
           docker cp ~/.ssh/id_rsa.pub segment3:/root/.ssh/authorized_keys
